@@ -41,3 +41,9 @@ RUN conda install --quiet --yes 'spylon-kernel=0.4*' && \
     conda clean -tipsy && \
     python -m spylon_kernel install --sys-prefix && \
     fix-permissions $CONDA_DIR
+
+# ijulia ijavascript iruby gophernotes
+RUN add-apt-repository ppa:chronitis/jupyter && \
+    apt-get update && \
+    apt-get install ijulia ijavascript iruby gophernotes && \
+    fix-permissions $CONDA_DIR
