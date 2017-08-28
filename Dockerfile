@@ -42,8 +42,11 @@ RUN conda install --quiet --yes 'spylon-kernel=0.4*' && \
     python -m spylon_kernel install --sys-prefix && \
     fix-permissions $CONDA_DIR
 
-# ijulia ijavascript iruby gophernotes
-RUN add-apt-repository ppa:chronitis/jupyter && \
-    apt-get update && \
-    apt-get install ijulia ijavascript iruby gophernotes && \
+# Nodejs
+RUN git clone https://github.com/notablemind/jupyter-nodejs.git && \
+    cd jupyter-nodejs && \
+    mkdir -p ~/.ipython/kernels/nodejs/ && \
+    npm install && node install.js && \
+    npm run build && \
+    npm run build-ext && \
     fix-permissions $CONDA_DIR
