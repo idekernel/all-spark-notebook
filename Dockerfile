@@ -16,6 +16,9 @@ RUN apt-get update && \
     gfortran \
     gcc && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+    
+# ihaskell ijulia ijavascript iruby gophernotes 
+RUN apt-get install -y ihaskell ijulia ijavascript iruby gophernotes
 
 USER $NB_USER
 
@@ -50,8 +53,3 @@ RUN conda install --quiet --yes 'spylon-kernel=0.4*' && \
 #    npm run build && \
 #    npm run build-ext && \
 #    fix-permissions $CONDA_DIR
-
-# ihaskell ijulia ijavascript iruby gophernotes 
-RUN apt-get update && \
-    apt-get install -y ihaskell ijulia ijavascript iruby gophernotes && \
-    fix-permissions $CONDA_DIR
