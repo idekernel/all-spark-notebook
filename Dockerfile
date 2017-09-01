@@ -43,10 +43,15 @@ RUN conda install --quiet --yes 'spylon-kernel=0.4*' && \
     fix-permissions $CONDA_DIR
 
 # Nodejs
-RUN git clone https://github.com/notablemind/jupyter-nodejs.git && \
-    cd jupyter-nodejs && \
-    mkdir -p ~/.ipython/kernels/nodejs/ && \
-    npm install && node install.js && \
-    npm run build && \
-    npm run build-ext && \
+#RUN git clone https://github.com/notablemind/jupyter-nodejs.git && \
+#    cd jupyter-nodejs && \
+#    mkdir -p ~/.ipython/kernels/nodejs/ && \
+#    npm install && node install.js && \
+#    npm run build && \
+#    npm run build-ext && \
+#    fix-permissions $CONDA_DIR
+
+# ihaskell ijulia ijavascript iruby gophernotes 
+RUN apt-get update && \
+    apt-get install -y ihaskell ijulia ijavascript iruby gophernotes && \
     fix-permissions $CONDA_DIR
