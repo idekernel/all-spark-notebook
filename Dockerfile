@@ -18,7 +18,15 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
     
 # ihaskell ijulia ijavascript iruby gophernotes 
-RUN apt-get install -y ihaskell ijulia ijavascript iruby gophernotes
+#RUN apt-get install -y ihaskell ijulia ijavascript iruby gophernotes
+
+# Nodejs
+RUN git clone https://github.com/notablemind/jupyter-nodejs.git && \
+    cd jupyter-nodejs && \
+    mkdir -p ~/.ipython/kernels/nodejs/ && \
+    npm install && node install.js && \
+    npm run build && \
+    npm run build-ext
 
 USER $NB_USER
 
@@ -44,12 +52,3 @@ RUN conda install --quiet --yes 'spylon-kernel=0.4*' && \
     conda clean -tipsy && \
     python -m spylon_kernel install --sys-prefix && \
     fix-permissions $CONDA_DIR
-
-# Nodejs
-#RUN git clone https://github.com/notablemind/jupyter-nodejs.git && \
-#    cd jupyter-nodejs && \
-#    mkdir -p ~/.ipython/kernels/nodejs/ && \
-#    npm install && node install.js && \
-#    npm run build && \
-#    npm run build-ext && \
-#    fix-permissions $CONDA_DIR
